@@ -33,5 +33,10 @@ public class UserService {
         return users.map(userMapper::entityToModel);
     }
 
+    public Mono<UserRequest> getUser(Long userId){
+        Mono<UserEntity> user = userRepository.findById(userId);
+        return  user.map(userMapper::entityToModel);
+    }
+
 
 }

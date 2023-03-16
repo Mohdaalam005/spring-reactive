@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -32,5 +29,9 @@ public class UserController {
     @GetMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Flux<UserRequest>>getUsers(){
         return new ResponseEntity<>(userService.getUsers(),HttpStatus.OK);
+    }
+    @GetMapping(value = "/users/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Mono<UserRequest>>getUser(@PathVariable Long userId){
+        return new ResponseEntity<>(userService.getUser(userId),HttpStatus.OK);
     }
 }
