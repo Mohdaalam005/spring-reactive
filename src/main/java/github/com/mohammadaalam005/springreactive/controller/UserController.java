@@ -21,17 +21,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Mono<UserResponse>>createUser(@RequestBody UserRequest userRequest){
+    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Mono<UserResponse>> createUser(@RequestBody UserRequest userRequest) {
         return new ResponseEntity<>(userService.createUser(userRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Flux<UserRequest>>getUsers(){
-        return new ResponseEntity<>(userService.getUsers(),HttpStatus.OK);
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Flux<UserRequest>> getUsers() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
-    @GetMapping(value = "/users/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Mono<UserRequest>>getUser(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.getUser(userId),HttpStatus.OK);
+
+    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Mono<UserRequest>> getUser(@PathVariable Long userId) {
+        return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Mono<UserRequest>> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest) {
+        return new ResponseEntity<>(userService.updateUser(userId, userRequest), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Mono<Void>> deleteUser(@PathVariable Long userId) {
+        return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.OK);
     }
 }

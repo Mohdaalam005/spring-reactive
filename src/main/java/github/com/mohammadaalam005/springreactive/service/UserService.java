@@ -28,14 +28,27 @@ public class UserService {
         return save.map(userMapper::entityToResponse);
     }
 
-    public Flux<UserRequest> getUsers(){
+    public Flux<UserRequest> getUsers() {
         Flux<UserEntity> users = userRepository.findAll();
         return users.map(userMapper::entityToModel);
     }
 
-    public Mono<UserRequest> getUser(Long userId){
+    public Mono<UserRequest> getUser(Long userId) {
         Mono<UserEntity> user = userRepository.findById(userId);
-        return  user.map(userMapper::entityToModel);
+        return user.map(userMapper::entityToModel);
+    }
+
+    public Mono<UserRequest> updateUser(Long userId, UserRequest userRequest) {
+        UserEntity userEntity = userMapper.modelToEntity(userRequest);
+        userEntity.setId(userId);
+        Mono<UserEntity> save = userRepository.save(userEntity);
+        return save.map(userMapper::entityToModel);
+
+    }
+
+    public Mono<Void> deleteUser(Long userId) {
+        Mono<Void> user = userRepository.deleteById(userId);
+        return user;
     }
 
 
