@@ -47,8 +47,8 @@ public class UserService {
     }
 
     public Mono<Void> deleteUser(Long userId) {
-        Mono<Void> user = userRepository.deleteById(userId);
-        return user;
+        return userRepository.deleteById(userId);
+
     }
 
 

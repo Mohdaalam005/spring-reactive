@@ -14,9 +14,9 @@ public interface UserMapper {
 
     UserEntity modelToEntity(UserRequest userRequest);
 
-    List<UserRequest>entitiesToModels(List<UserEntity>userEntities);
+    List<UserRequest> entitiesToModels(List<UserEntity> userEntities);
 
-    UserResponse entityToResponse(UserEntity userEntity) ;
+    UserResponse entityToResponse(UserEntity userEntity);
 
 
 }
